@@ -1,7 +1,11 @@
 const express = require('express')
+const colors = require('colors') // initialize in this file so we can use anywhere
 const dotenv = require('dotenv').config()   // allows us to have a dotenv file with variables in it
 const {errorHandler} = require('./middleware/errorMiddleware')
+const connectDB = require('./config/db')
 const port = process.env.PORT || 5000   // port server access port variable in .env folder, or 5000 if our .env port isn't found for some reason
+
+connectDB()
 
 const app = express();  // initialize express
 
