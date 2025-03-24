@@ -1,3 +1,4 @@
+// file contains our custom error handler
 // middleware refers to functions that execute during the request/response cycle
 
 // overwrite default express error handler, initially when looking at headers > content-type on postman, our post request showed text/html

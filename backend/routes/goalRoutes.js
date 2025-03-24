@@ -3,8 +3,10 @@ const express = require('express')  // common js module syntax, different from E
 const router = express.Router()
 const { getGoals, setGoal, updateGoal, deleteGoal } = require('../controllers/goalController')
 
-router.route('/').get(getGoals).post(setGoal)
-router.route('/:id').delete(deleteGoal).put(updateGoal)
+const {protect} = require('../middleware/authMiddleware')
+
+router.route('/').get(protect, getGoals).post(protect, setGoal)
+router.route('/:id').delete(protect, deleteGoal).put(protect, updateGoal)
 
 // we were able to condense get and post together because they had the same route '/', same with put and delete '/:id'
 /*

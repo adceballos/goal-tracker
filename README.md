@@ -1,1 +1,0 @@
-# Follows Traversy Media's four part youtube tutorial
