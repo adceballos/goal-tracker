@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 function Header() {
   return (
     <header className="flex items-center justify-between p-4 text-white border-b border-gray-300 w-full">
-        <div className='text-3xl text-black font-bold'>
+        <div className='text-2xl text-black font-bold'>
             <Link to='/'>GoalSetter</Link>
         </div>
         <ul className='flex gap-4'>
