@@ -35,7 +35,6 @@ function Register() {
 
         // reset the state after we check everything by dispatching the reset reducer from authSlice which just sets all these states back to false
         dispatch(reset())
-
     }, [user, isError, isSuccess, message, navigate, dispatch])
 
     // e is the event object passed when the user types

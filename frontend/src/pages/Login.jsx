@@ -1,24 +1,58 @@
 import {useState, useEffect} from 'react'
 import {FaSign, FaSignInAlt} from 'react-icons/fa'
+import {useSelector, useDispatch} from 'react-redux'    // useSelector is used to select something from the state like isLoading or isError, useDispatch to dispatch function like register or reset
+import { useNavigate } from 'react-router-dom'
+import {toast} from 'react-toastify'
+import {login, reset} from '../features/auth/authSlice'
+import Spinner from '../components/Spinner'
 
 function Login() {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-    })
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  })
 
-    const {email, password} = formData
+  const {email, password} = formData
 
-    const onChange = (e) => {
-        setFormData((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value,
-        }))
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const {user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message)
     }
 
-    const onSubmit = (e) => {
-        e.preventDefault()
+    if (isSuccess || user) {
+      navigate('/')
     }
+
+    // reset the state after we check everything by dispatching the reset reducer from authSlice which just sets all these states back to false
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    const userData = {
+      email,
+      password
+    }
+
+    dispatch(login(userData))
+  }
+
+  if (isLoading) {
+    return <Spinner />
+  }
 
   return (
     <>
