@@ -1,7 +1,7 @@
 {
   "name": "mern-tutorial",
   "version": "1.0.0",
-  "description": "Goalsetter app from youtube tutorial",
+  "description": "Goals app using mern stack",
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
